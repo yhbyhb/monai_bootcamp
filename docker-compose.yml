@@ -1,0 +1,15 @@
+services:
+  monai:
+    image: projectmonai/monai
+    ports:
+      - "8888:8888"
+    volumes:
+      - .:/workspace
+    command: sh -c "cd /workspace && jupyter notebook"
+    ipc: host
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            capabilities: [gpu]
